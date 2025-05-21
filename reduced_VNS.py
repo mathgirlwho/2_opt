@@ -198,8 +198,8 @@ def main():
     )
 
     save_tour(improved_routes, args.output, final_cost)
-    print(f"✅ Final Cost: {final_cost:.2f}")
-    print(f"✅ Output saved to: {args.output}")
+    print(f" Final Cost: {final_cost:.2f}")
+    print(f" Output saved to: {args.output}")
 
 if __name__ == "__main__":
     main()
