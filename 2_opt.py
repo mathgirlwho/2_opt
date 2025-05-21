@@ -402,14 +402,14 @@ def main():
     parser.add_argument('--plot', type=str, default='routes.png', help='Path to save plot (ignored here)')
     args = parser.parse_args()
 
-    print("📦 Parsing .vrp file...")
+    print(" Parsing .vrp file...")
     vrp_data = parse_vrp(args.vrp)
 
     max_iter = 100
     init_strategy = "nearest"
 
     if args.par:
-        print("⚙️ Loading parameters from .par file...")
+        print(" Loading parameters from .par file...")
         with open(args.par, 'r') as f:
             for line in f:
                 line = line.strip()
@@ -422,7 +422,7 @@ def main():
                     elif key == "INIT_STRATEGY":
                         init_strategy = val.lower()
 
-    print(f"🧠 Generating initial solution using strategy: {init_strategy}")
+    print(f" Generating initial solution using strategy: {init_strategy}")
     if init_strategy == "nearest":
         routes = nearest_neighbor_init(vrp_data)
     else:
@@ -431,12 +431,12 @@ def main():
     init_cost, _ = compute_total_cost(vrp_data, routes)
     print(f"➡ Initial cost: {init_cost:.2f}")
 
-    print(f"🚀 Running 2-opt for max {max_iter} iterations...")
+    print(f" Running 2-opt for max {max_iter} iterations...")
     improved_routes, final_cost = two_opt_vrp(vrp_data, routes, max_iterations=max_iter)
-    print(f"✅ Final cost: {final_cost:.2f}")
+    print(f" Final cost: {final_cost:.2f}")
 
     save_tour(improved_routes, args.save_tour, final_cost)
-    print(f"📄 Saved improved tour to: {args.save_tour}")
+    print(f" Saved improved tour to: {args.save_tour}")
 
 if __name__ == "__main__":
     main()
