@@ -193,15 +193,15 @@ def main():
     parser.add_argument('--radius', type=float, default=10, help='Radius for pairwise perturbation')
     args = parser.parse_args()
 
-    print("📦 Loading VRP...")
+    print(" Loading VRP...")
     vrp_data = parse_vrp(args.vrp)
 
-    print("🚀 Starting Basic VNS...")
+    print(" Starting Basic VNS...")
     best_routes, best_cost = basic_vns(vrp_data, k_max=args.k_max, max_iter=args.max_iter, radius=args.radius)
 
-    print(f"✅ Final cost: {best_cost:.2f}")
+    print(f" Final cost: {best_cost:.2f}")
     save_tour(best_routes, args.save_tour, best_cost)
-    print(f"📄 Tour saved to {args.save_tour}")
+    print(f" Tour saved to {args.save_tour}")
 
 if __name__ == "__main__":
     main()
