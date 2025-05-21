@@ -204,19 +204,26 @@ def save_tour(routes, path, total_cost):
 
 # ----------- Main -----------
 def main():
-    parser = argparse.ArgumentParser(description="Basic VNS for VRP")
+    parser = argparse.ArgumentParser(description="Skewed VNS for VRP")
     parser.add_argument('--vrp', type=str, required=True, help='Path to .vrp file')
     parser.add_argument('--save_tour', type=str, default='vns_solution.tour', help='Output tour file')
     parser.add_argument('--max_iter', type=int, default=50, help='Max iterations for VNS')
     parser.add_argument('--k_max', type=int, default=1, help='Max neighborhood size k')
     parser.add_argument('--radius', type=float, default=10, help='Radius for pairwise perturbation')
+    parser.add_argument('--alpha', type=float, default=0.1, help='Skew coefficient for skewed VNS')
     args = parser.parse_args()
 
     print("📦 Loading VRP...")
     vrp_data = parse_vrp(args.vrp)
 
-    print("🚀 Starting Basic VNS...")
-    best_routes, best_cost = skewed_vns(vrp_data, k_max=args.k_max, max_iter=args.max_iter, radius=args.radius, alpha=args.alpha)
+    print("🚀 Starting Skewed VNS...")
+    best_routes, best_cost = skewed_vns(
+        vrp_data, 
+        k_max=args.k_max, 
+        max_iter=args.max_iter, 
+        radius=args.radius, 
+        alpha=args.alpha
+    )
 
     print(f"✅ Final cost: {best_cost:.2f}")
     save_tour(best_routes, args.save_tour, best_cost)
@@ -224,3 +231,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
