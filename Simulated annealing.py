@@ -154,12 +154,6 @@ def random_exchange(routes, coords, m, radius=10):
 
     return all_routes
 
-def solution_distance(routes1, routes2):
-    """Returns number of differing customers between two VRP solutions."""
-    set1 = set(node for route in routes1 for node in route[1:-1])  # skip depots
-    set2 = set(node for route in routes2 for node in route[1:-1])
-    return len(set1.symmetric_difference(set2))
-
 # ----------- Simulated Annealing -----------
 def simulated_annealing(vrp_data, initial_temp=100, cooling_rate=0.95, min_temp=0.01, max_iter=100, radius=10):
     coords = vrp_data["node_coords"]
@@ -248,4 +242,4 @@ def main():
     print(f" Tour saved to {args.save_tour}")
 
 if __name__ == "__main__":
-    main(
+    main()
